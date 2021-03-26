@@ -59,7 +59,7 @@ services:
     networks:
      - lnmp-networks
   php80:
-    build: ./dockerfile/php-8.0.2
+    build: ./dockerfile/php-8.0.3
     tty: true
     restart: always
     container_name: php80
