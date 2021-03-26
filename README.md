@@ -31,5 +31,6 @@ sh  bin/begin.sh
 
 ### 四、一些问题
 1.当修改服务的配置文件，比如NGINX增加一个站点的配置文件，增加到docker/config/nginx/conf.d/目录下然后  docker-compose restart
+
 2.redis的配置文件不生效，php的配置文件也没生效---待解决
 
