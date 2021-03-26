@@ -3,4 +3,5 @@ mkdir -p /data/{www,logs/{nginx,php72,php73,php74,php80,redis,mysql57,mysql80},r
 cd ..
 mv ./docker /data/
 cd /data/docker
+cp .env.example .env
 docker-compose up
