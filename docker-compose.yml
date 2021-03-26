@@ -1,0 +1,151 @@
+version: '3.3'
+services:
+  nginx:
+    build: ./dockerfile/nginx-1.18.0
+    ports:
+      - ${NGINX_HOST_HTTP_PORT}:80
+      - ${NGINX_HOST_HTTPS_PORT}:443
+    restart: always
+    tty: true
+    container_name: nginx
+    volumes:
+      - /data/www:/var/www/html
+      - /data/logs/nginx:/var/log/nginx
+      - /data/docker/config/nginx/conf.d:/etc/nginx/conf.d
+      - /data/docker/config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+     - lnmp-networks
+  php73:
+    build: ./dockerfile/php-7.3.21
+    tty: true
+    restart: always
+    container_name: php73
+    volumes:
+      - /data/www:/var/www/html
+      - /data/logs/php73:/var/log/php
+      - /data/docker/config/php73/php.ini:/usr/local/etc/php/php.ini
+      - /data/docker/config/php73/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    depends_on:
+      - nginx
+    networks:
+     - lnmp-networks
+  php72:
+    build: ./dockerfile/php-7.2.26
+    tty: true
+    restart: always
+    container_name: php72
+    volumes:
+      - /data/www:/var/www/htmlphp72
+      - /data/logs/php72:/var/log/php
+      - /data/docker/config/php72/php.ini:/usr/local/etc/php/php.ini
+      - /data/docker/config/php72/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    depends_on:
+      - nginx
+    networks:
+     - lnmp-networks
+  php74:
+    build: ./dockerfile/php-7.4.16
+    tty: true
+    restart: always
+    container_name: php74
+    volumes:
+      - /data/www:/var/www/html
+      - /data/logs/php74:/var/log/php
+      - /data/docker/config/php74/php.ini:/usr/local/etc/php/php.ini
+      - /data/docker/config/php74/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    depends_on:
+      - nginx
+    networks:
+     - lnmp-networks
+  php80:
+    build: ./dockerfile/php-8.0.2
+    tty: true
+    restart: always
+    container_name: php80
+    volumes:
+      - /data/www:/var/www/html
+      - /data/logs/php80:/var/log/php
+      - /data/docker/config/php80/php.ini:/usr/local/etc/php/php.ini
+      - /data/docker/config/php80/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    depends_on:
+      - nginx
+    networks:
+     - lnmp-networks
+  redis:
+    build: ./dockerfile/redis-6.2.1
+    container_name: redis
+    tty: true
+    restart: always
+    volumes:
+      - /data/docker/config/redis/redis.conf:/etc/redis/redis.conf
+      - /data/redis:/var/lib/redis
+      - /data/logs/redis:/var/log/redis
+    networks:
+     - lnmp-networks
+  mysql57:
+    build: ./dockerfile/mysql-5.7.33
+    container_name: mysql57
+    tty: true
+    restart: always
+    ports:
+      - ${MYSQL57_PORT}:3306
+    volumes:
+      - /data/mysql57:/var/lib/mysql
+      - /data/docker/config/mysql57/my.cnf:/etc/my.cnf
+      - /data/logs/mysql57:/var/log/mysql
+      - /data/mysqlback:/data/mysqlback
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL57_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL57_DATABASE}
+      MYSQL_USER: ${MYSQL57_USER}
+      MYSQL_PASSWORD: ${MYSQL57_PASSWORD}
+    networks:
+      - lnmp-networks
+  mysql80:
+    build: ./dockerfile/mysql-8.0.18
+    container_name: mysql80
+    tty: true
+    restart: always
+    ports:
+      - ${MYSQL80_PORT}:3306
+    volumes:
+      - /data/mysql80:/var/lib/mysql
+      - /data/docker/config/mysql80/my.cnf:/etc/my.cnf
+      - /data/logs/mysql80:/var/log/mysql
+      - /data/mysqlback80:/data/mysqlback
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL80_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL80_DATABASE}
+      MYSQL_USER: ${MYSQL80_USER}
+      MYSQL_PASSWORD: ${MYSQL80_PASSWORD}
+    networks:
+      - lnmp-networks
+  rabbitmq:
+    build: ./dockerfile/rabbitmq-3.8
+    container_name: rabbitmq
+    tty: true
+    restart: always
+    ports:
+      - ${RABBITMQ_PORT}:5672
+      - ${RABBITMQ_HTTP_PORT}:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
+    networks:
+      - lnmp-networks
+  mongo:
+    build: ./dockerfile/mongo-4.4
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    restart: always
+    privileged: true
+    ports:
+      - ${MONGO_PORT}:27017
+    networks:
+      - lnmp-networks
+networks:
+  lnmp-networks:

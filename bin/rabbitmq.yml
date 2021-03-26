@@ -1,0 +1,14 @@
+version: '3.3'
+services:  
+  rabbitmq:
+    build: ../dockerfile/rabbitmq-3.8
+    container_name: rabbitmq
+    tty: true
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: hunter
+      RABBITMQ_DEFAULT_PASS: 103952qwe
+      RABBITMQ_DEFAULT_VHOST: my_vhost
