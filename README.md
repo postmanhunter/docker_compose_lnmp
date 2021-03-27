@@ -24,7 +24,6 @@ git clone https://github.com/postmanhunter/docker_compose_lnmp.git docker
 ### 三、初始化
 
 ```
-cd  docker
 sh  docker/bin/begin.sh
 
 ```
