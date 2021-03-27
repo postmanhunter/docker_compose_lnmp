@@ -25,7 +25,7 @@ git clone https://github.com/postmanhunter/docker_compose_lnmp.git docker
 
 ```
 cd  docker
-sh  bin/begin.sh
+sh  docker/bin/begin.sh
 
 ```
 
