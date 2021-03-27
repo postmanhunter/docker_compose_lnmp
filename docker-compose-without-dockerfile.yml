@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   nginx:
-    image: hunter202103/nginx1.18.0
+    image: hunter202103/nginx1.18.0:nginx1.18.0
     ports:
       - ${NGINX_HOST_HTTP_PORT}:80
       - ${NGINX_HOST_HTTPS_PORT}:443
@@ -17,7 +17,7 @@ services:
     networks:
      - lnmp-networks
   php72:
-    image: hunter202103/php72
+    image: hunter202103/php72:php72
     tty: true
     restart: always
     container_name: php72
@@ -31,7 +31,7 @@ services:
     networks:
       - lnmp-networks
   php73:
-    image: hunter202103/php73
+    image: hunter202103/php73:php73
     tty: true
     restart: always
     container_name: php73
@@ -45,7 +45,7 @@ services:
     networks:
      - lnmp-networks
   php74:
-    image: hunter202103/php74
+    image: hunter202103/php74:php74
     tty: true
     restart: always
     container_name: php74
@@ -59,7 +59,7 @@ services:
     networks:
       - lnmp-networks
   php80:
-    image: hunter202103/php80
+    image: hunter202103/php80:php80
     tty: true
     restart: always
     container_name: php80
@@ -73,7 +73,7 @@ services:
     networks:
       - lnmp-networks
   redis:
-    image: hunter202103/redis6.2.1
+    image: hunter202103/redis6.2.1:redis6.2.1
     container_name: redis
     tty: true
     restart: always
@@ -84,7 +84,7 @@ services:
     networks:
       - lnmp-networks
   mysql57:
-    image: hunter202103/mysql57
+    image: hunter202103/mysql57:mysql57
     container_name: mysql57
     tty: true
     restart: always
@@ -103,7 +103,7 @@ services:
     networks:
       - lnmp-networks
   mysql80:
-    image: hunter202103/mysql80
+    image: hunter202103/mysql80:mysql80
     container_name: mysql80
     tty: true
     restart: always
@@ -122,7 +122,7 @@ services:
     networks:
       - lnmp-networks
   rabbitmq:
-    image: hunter202103/rabbitmq38
+    image: hunter202103/rabbitmq38:rabbitmq38
     container_name: rabbitmq
     tty: true
     restart: always
@@ -136,7 +136,7 @@ services:
     networks:
       - lnmp-networks
   mongo:
-    image: hunter202103/mongo44
+    image: hunter202103/mongo44:mongo44
     container_name: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
