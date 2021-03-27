@@ -1,6 +1,6 @@
-From redis:6.2.1
+FROM redis:6.2.1
 #维护者信息
-MAINTAINER hunter 1039526501@qq.com
+LABEL maintainer="1039526501@qq.com"
 # 复制时区配置
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

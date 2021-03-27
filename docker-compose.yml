@@ -16,20 +16,6 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
     networks:
      - lnmp-networks
-  php73:
-    build: ./dockerfile/php-7.3.21
-    tty: true
-    restart: always
-    container_name: php73
-    volumes:
-      - /data/www:/var/www/html
-      - /data/logs/php73:/var/log/php
-      - /data/docker/config/php73/php.ini:/usr/local/etc/php/php.ini
-      - /data/docker/config/php73/www.conf:/usr/local/etc/php-fpm.d/www.conf
-    depends_on:
-      - nginx
-    networks:
-     - lnmp-networks
   php72:
     build: ./dockerfile/php-7.2.26
     tty: true
@@ -44,6 +30,20 @@ services:
       - nginx
     networks:
       - lnmp-networks
+  php73:
+    build: ./dockerfile/php-7.3.21
+    tty: true
+    restart: always
+    container_name: php73
+    volumes:
+      - /data/www:/var/www/html
+      - /data/logs/php73:/var/log/php
+      - /data/docker/config/php73/php.ini:/usr/local/etc/php/php.ini
+      - /data/docker/config/php73/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    depends_on:
+      - nginx
+    networks:
+     - lnmp-networks
   php74:
     build: ./dockerfile/php-7.4.16
     tty: true
