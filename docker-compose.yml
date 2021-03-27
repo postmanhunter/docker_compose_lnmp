@@ -36,14 +36,14 @@ services:
     restart: always
     container_name: php72
     volumes:
-      - /data/www:/var/www/htmlphp72
+      - /data/www:/var/www/html
       - /data/logs/php72:/var/log/php
       - /data/docker/config/php72/php.ini:/usr/local/etc/php/php.ini
       - /data/docker/config/php72/www.conf:/usr/local/etc/php-fpm.d/www.conf
     depends_on:
       - nginx
     networks:
-     - lnmp-networks
+      - lnmp-networks
   php74:
     build: ./dockerfile/php-7.4.16
     tty: true
@@ -57,7 +57,7 @@ services:
     depends_on:
       - nginx
     networks:
-     - lnmp-networks
+      - lnmp-networks
   php80:
     build: ./dockerfile/php-8.0.3
     tty: true
@@ -71,7 +71,7 @@ services:
     depends_on:
       - nginx
     networks:
-     - lnmp-networks
+      - lnmp-networks
   redis:
     build: ./dockerfile/redis-6.2.1
     container_name: redis
@@ -82,7 +82,7 @@ services:
       - /data/redis:/var/lib/redis
       - /data/logs/redis:/var/log/redis
     networks:
-     - lnmp-networks
+      - lnmp-networks
   mysql57:
     build: ./dockerfile/mysql-5.7.33
     container_name: mysql57
