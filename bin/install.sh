@@ -10,8 +10,12 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 
 # 安装docker
 yum install docker-ce -y
-# 安装docker命令补全
-yum install bash-completion -y
+
+# 设置docker开机自启动
+systemctl enable docker
+
+# 启动docker服务
+systemctl start docker
 
 # 安装docker-compose
 curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
