@@ -9,6 +9,7 @@ services:
     tty: true
     container_name: nginx
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/www:/var/www/html
       - /data/logs/nginx:/var/log/nginx
       - /data/docker/config/nginx/conf.d:/etc/nginx/conf.d
@@ -22,6 +23,7 @@ services:
     restart: always
     container_name: php72
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/www:/var/www/html
       - /data/logs/php72:/var/log/php
       - /data/docker/config/php72/php.ini:/usr/local/etc/php/php.ini
@@ -36,6 +38,7 @@ services:
     restart: always
     container_name: php73
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/www:/var/www/html
       - /data/logs/php73:/var/log/php
       - /data/docker/config/php73/php.ini:/usr/local/etc/php/php.ini
@@ -50,6 +53,7 @@ services:
     restart: always
     container_name: php74
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/www:/var/www/html
       - /data/logs/php74:/var/log/php
       - /data/docker/config/php74/php.ini:/usr/local/etc/php/php.ini
@@ -64,6 +68,7 @@ services:
     restart: always
     container_name: php80
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/www:/var/www/html
       - /data/logs/php80:/var/log/php
       - /data/docker/config/php80/php.ini:/usr/local/etc/php/php.ini
@@ -78,6 +83,7 @@ services:
     tty: true
     restart: always
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/docker/config/redis/redis.conf:/etc/redis/redis.conf
       - /data/redis:/var/lib/redis
       - /data/logs/redis:/var/log/redis
@@ -91,6 +97,7 @@ services:
     ports:
       - ${MYSQL57_PORT}:3306
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/mysql57:/var/lib/mysql
       - /data/docker/config/mysql57/my.cnf:/etc/my.cnf
       - /data/logs/mysql57:/var/log/mysql
@@ -110,6 +117,7 @@ services:
     ports:
       - ${MYSQL80_PORT}:3306
     volumes:
+      - ./localtime:/etc/localtime:ro
       - /data/mysql80:/var/lib/mysql
       - /data/docker/config/mysql80/my.cnf:/etc/my.cnf
       - /data/logs/mysql80:/var/log/mysql
@@ -147,5 +155,20 @@ services:
       - ${MONGO_PORT}:27017
     networks:
       - lnmp-networks
+  circus:
+    build: ./dockerfile/circus
+    container_name: circus
+    volumes:
+      - /etc/hosts:/etc/hosts:ro
+      - ./localtime:/etc/localtime:ro
+      - ./config/php73/php.ini:/usr/local/etc/php/php.ini:ro
+      - /data/www:/var/www/html
+  crontab:
+    build: ./dockerfile/crontab
+    volumes:
+      - /etc/hosts:/etc/hosts:ro
+      - ./localtime:/etc/localtime:ro
+      - ./config/php73/php.ini:/usr/local/etc/php/php.ini:ro
+      - /data/www:/var/www/html
 networks:
   lnmp-networks:

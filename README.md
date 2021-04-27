@@ -27,7 +27,11 @@ git clone https://github.com/postmanhunter/docker_compose_lnmp.git docker
 sh  docker/bin/begin.sh
 
 ```
+### 四、circus和crontab
 
+```
+circus和crontab都是跟随具体项目的，需要指定对应circus.ini和crontab.ini配置文件
+```
 ### 四、一些问题
 1.当修改服务的配置文件，比如NGINX增加一个站点的配置文件，增加到docker/config/nginx/conf.d/目录下然后  docker-compose restart
 
