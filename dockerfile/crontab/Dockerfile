@@ -1,5 +1,4 @@
 FROM php:7.3.14
-COPY ./../../aliyun.sources.list /etc/apt/sources.list
 
 RUN apt-get update
 RUN apt-get -y install libzip-dev unzip

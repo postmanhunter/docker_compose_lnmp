@@ -1,5 +1,5 @@
 FROM redis:6.2.1
-COPY ./../../aliyun.sources.list /etc/apt/sources.list
+
 #维护者信息
 LABEL maintainer="1039526501@qq.com"
 

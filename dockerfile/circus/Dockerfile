@@ -1,5 +1,4 @@
 FROM php:7.3.21-fpm
-COPY ./../../aliyun.sources.list /etc/apt/sources.list 
 
 RUN apt-get update && apt-get -y install libzip-dev unzip
 RUN docker-php-ext-install pdo_mysql bcmath sockets zip

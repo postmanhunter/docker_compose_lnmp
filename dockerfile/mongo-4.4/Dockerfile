@@ -1,5 +1,5 @@
 FROM mongo:4.4
-COPY ./../../aliyun.sources.list /etc/apt/sources.list
+
 
 LABEL maintainer="1039526501@qq.com"
 

@@ -1,5 +1,5 @@
 FROM php:8.0.3-fpm
-COPY ./../../aliyun.sources.list /etc/apt/sources.list
+
 #维护者信息
 LABEL maintainer="1039526501@qq.com"
 
