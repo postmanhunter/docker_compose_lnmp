@@ -1,4 +1,5 @@
 FROM mysql:5.7.33
+COPY ./../../aliyun.sources.list /etc/apt/sources.list
 #维护者信息
 LABEL maintainer="1039526501@qq.com"
 
