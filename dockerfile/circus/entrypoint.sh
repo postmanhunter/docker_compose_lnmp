@@ -1,2 +1,2 @@
 #!/bin/sh
-exec gosu www-data circusd /data/www/webapi/scripts/circus.ini
+exec gosu www-data circusd /var/www/html/laravel/scripts/circus.ini
