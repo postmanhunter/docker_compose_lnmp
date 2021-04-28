@@ -159,6 +159,8 @@ services:
   circus:
     build: ./dockerfile/circus
     container_name: circus
+    tty: true
+    restart: always
     volumes:
       - /etc/hosts:/etc/hosts:ro
       - ./localtime:/etc/localtime:ro
@@ -168,6 +170,9 @@ services:
       - lnmp-networks
   crontab:
     build: ./dockerfile/crontab
+    container_name: crontab
+    tty: true
+    restart: always
     volumes:
       - /etc/hosts:/etc/hosts:ro
       - ./localtime:/etc/localtime:ro
