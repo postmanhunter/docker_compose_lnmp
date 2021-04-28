@@ -1,4 +1,4 @@
-FROM php:7.3.14
+FROM php:7.3.21-fpm
 
 RUN apt-get update
 RUN apt-get -y install libzip-dev unzip

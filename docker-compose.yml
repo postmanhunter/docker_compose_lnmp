@@ -9,6 +9,7 @@ services:
     tty: true
     container_name: nginx
     volumes:
+      - /etc/hosts:/etc/hosts:ro
       - ./localtime:/etc/localtime:ro
       - /data/www:/var/www/html
       - /data/logs/nginx:/var/log/nginx
@@ -163,6 +164,8 @@ services:
       - ./localtime:/etc/localtime:ro
       - ./config/php73/php.ini:/usr/local/etc/php/php.ini:ro
       - /data/www:/var/www/html
+    networks:
+      - lnmp-networks
   crontab:
     build: ./dockerfile/crontab
     volumes:
@@ -170,5 +173,7 @@ services:
       - ./localtime:/etc/localtime:ro
       - ./config/php73/php.ini:/usr/local/etc/php/php.ini:ro
       - /data/www:/var/www/html
+    networks:
+      - lnmp-networks
 networks:
   lnmp-networks:
