@@ -172,7 +172,7 @@ services:
       - /etc/hosts:/etc/hosts:ro
       - ./localtime:/etc/localtime:ro
       - ./config/php73/php.ini:/usr/local/etc/php/php.ini:ro
-      - /data/www:/var/www/html
+      - /data/www:/var/www/html:rw
     networks:
       - lnmp-networks
 networks:
