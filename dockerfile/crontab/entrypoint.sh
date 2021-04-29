@@ -1,5 +1,5 @@
 #!/bin/sh
-crontab /var/www/html/laravel/scripts/crontab.ini
+crontab -u www-data /var/www/html/laravel/scripts/crontab.ini
 touch /var/log/cron
 /etc/init.d/cron start
 tail -f /var/log/cron
