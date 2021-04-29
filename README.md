@@ -30,7 +30,7 @@ sh  docker/bin/begin.sh
 ### 四、circus和crontab
 
 ```
-circus和crontab都是跟随具体项目的，需要指定对应circus.ini和crontab.ini配置文件
+circus和crontab都是跟随具体项目的，需要指定对应circus.ini和crontab.ini配置文件,其中circus.ini文件可以在windowx下编辑，但crontab.ini必须要linux的编辑器(如vim)下编辑（可以将window写好的复制到vim编辑器内，）
 ```
 ### 四、一些问题
 1.当修改服务的配置文件，比如NGINX增加一个站点的配置文件，增加到docker/config/nginx/conf.d/目录下然后  docker-compose restart
