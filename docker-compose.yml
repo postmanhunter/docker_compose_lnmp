@@ -181,43 +181,36 @@ services:
     networks:
       - lnmp-networks
   elasticsearch:
-    image: elasticsearch:6.4.1
     container_name: elasticsearch
+    image: elasticsearch:7.6.0             #镱像(image)
+    restart: always                        #重启方式
     environment:
-      - "cluster.name=elasticsearch" #集群名称为elasticsearch
-      - "discovery.type=single-node" #单节点启动
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" #jvm内存分配为512MB
-    volumes:
-      - /data/elasticsearch/plugins:/usr/share/elasticsearch/plugins
-      - /data/elasticsearch/data:/usr/share/elasticsearch/data
+      discovery.type: single-node          #环境变量：运行模式 单例
     ports:
-      - 9200:9200
+      - "9200:9200"                        #端口映射
+      - "9300:9300"
     networks:
       - lnmp-networks
   kibana:
-    image: kibana:6.4.1
     container_name: kibana
-    links:
-      - elasticsearch:es #配置elasticsearch域名为es
-    depends_on:
-      - elasticsearch
+    image: kibana:7.6.0                     #镱像(image)
+    restart: always                         #重启方式
     environment:
-      - "elasticsearch.hosts=http://es:9200" #因为上面配置了域名，所以这里可以简写为http://es:9200
+      I18N_LOCALE: "zh-CN"                  #指定中文
     ports:
-      - 5601:5601
+      - "5601:5601"   
     networks:
-      - lnmp-networks
+      - lnmp-networks                     #端口映射
   logstash:
-    image: logstash:6.4.1
     container_name: logstash
-    volumes:
+    image: logstash:7.6.0
+    restart: always
+    volumes:                                #文件夹映射，本地:容器
+      - /data/logs/logstash/logs:/usr/share/logstash/logs
       - /data/docker/config/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-    depends_on:
-      - elasticsearch
-    links:
-      - elasticsearch:es
-    ports:
-      - 4560:4560
+    ports: 
+      - "5044:5044"
+      - "9600:9600"
     networks:
       - lnmp-networks
 networks:
