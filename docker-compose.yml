@@ -211,7 +211,7 @@ services:
     image: logstash:6.4.1
     container_name: logstash
     volumes:
-      - /data/config/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - /data/docker/config/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     depends_on:
       - elasticsearch
     links:
